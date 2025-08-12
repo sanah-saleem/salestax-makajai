@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.assignment.SalesTax.Entity.Product;
 import com.assignment.SalesTax.Entity.Receipt;
 import com.assignment.SalesTax.Entity.ReceiptLine;
@@ -13,6 +15,7 @@ import com.assignment.SalesTax.Tax.ImportDutyTaxCalculator;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@Service
 public class ReceiptService {
 
     private final BasicSalesTaxCalculator basicSalesTaxCalculator;

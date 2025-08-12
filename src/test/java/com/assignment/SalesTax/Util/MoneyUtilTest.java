@@ -10,8 +10,13 @@ public class MoneyUtilTest {
 
     @Test
     public void shouldRoundUpToNearestPoint05() {
-        assertEquals(new BigDecimal("1.25"), MoneyUtil.roundTax(new BigDecimal("1.24")));
-        assertEquals(new BigDecimal("1.25"), MoneyUtil.roundTax(new BigDecimal("1.21")));
-        assertEquals(new BigDecimal("1.20"), MoneyUtil.roundTax(new BigDecimal("1.20")));
+
+        TaxProperties props = new TaxProperties();
+        props.setRoundingFactor(new BigDecimal("0.05"));
+        MoneyUtil util = new MoneyUtil(props);
+        
+        assertEquals(new BigDecimal("1.25"), util.roundTax(new BigDecimal("1.24")));
+        assertEquals(new BigDecimal("1.25"), util.roundTax(new BigDecimal("1.21")));
+        assertEquals(new BigDecimal("1.20"), util.roundTax(new BigDecimal("1.20")));
     }
 }

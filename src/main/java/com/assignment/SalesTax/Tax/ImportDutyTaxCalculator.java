@@ -6,16 +6,24 @@ import org.springframework.stereotype.Component;
 
 import com.assignment.SalesTax.Entity.Product;
 import com.assignment.SalesTax.Util.MoneyUtil;
+import com.assignment.SalesTax.Util.TaxProperties;
+
+import lombok.RequiredArgsConstructor;
 
 @Component
+@RequiredArgsConstructor
 public class ImportDutyTaxCalculator implements ITaxCalculator{
     
-    private final BigDecimal rate = new BigDecimal("0.05");
+    private final TaxProperties taxProperties;
+    private final MoneyUtil moneyUtil;
 
     @Override
     public BigDecimal calculateTax(Product product) {
+
+        BigDecimal rate = taxProperties.getImportRate();
+
         if(product.isImported()) {
-            return MoneyUtil.roundTax(product.getPrice().multiply(rate));
+            return moneyUtil.roundTax(product.getPrice().multiply(rate));
         }
         return BigDecimal.ZERO;
     }

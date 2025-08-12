@@ -6,26 +6,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.assignment.SalesTax.Entity.Product;
 import com.assignment.SalesTax.Entity.ProductCategory;
 import com.assignment.SalesTax.Entity.Receipt;
-import com.assignment.SalesTax.Tax.BasicSalesTaxCalculator;
-import com.assignment.SalesTax.Tax.ImportDutyTaxCalculator;
 
+@SpringBootTest
 public class ReceiptServiceTest {
     
+    @Autowired
     private ReceiptService receiptService;
-
-    @BeforeEach
-    void setup() {
-        receiptService = new ReceiptService(
-            new BasicSalesTaxCalculator(),
-            new ImportDutyTaxCalculator()
-            );
-    }
 
     @Test
     void shouldCalculateExampleInput1() {
@@ -54,8 +47,8 @@ public class ReceiptServiceTest {
 
         Receipt receipt = receiptService.generateReceipt(products);
 
-        assertTrue(receipt.getTotalSalesTax().compareTo(new BigDecimal("7.70")) == 0);
-        assertTrue(receipt.getTotal().compareTo(new BigDecimal("65.20")) == 0);
+        assertTrue(receipt.getTotalSalesTax().compareTo(new BigDecimal("7.65")) == 0);
+        assertTrue(receipt.getTotal().compareTo(new BigDecimal("65.15")) == 0);
 
     }
 
