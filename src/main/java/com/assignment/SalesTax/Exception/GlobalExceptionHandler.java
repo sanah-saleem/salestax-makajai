@@ -30,6 +30,11 @@ public class GlobalExceptionHandler {
         return errorResponse(ex.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, Object>> handleGenericException(Exception ex) {
+        return errorResponse(UNEXPECTED_ERROR + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     //Helper method to format error response
     private ResponseEntity<Map<String, Object>> errorResponse(Object errors, HttpStatus status) {
         Map<String, Object> body = new HashMap<>();
