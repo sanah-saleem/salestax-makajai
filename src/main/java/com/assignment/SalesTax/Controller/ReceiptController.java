@@ -13,6 +13,7 @@ import com.assignment.SalesTax.Entity.Product;
 import com.assignment.SalesTax.Entity.Receipt;
 import com.assignment.SalesTax.Service.ReceiptService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -23,7 +24,7 @@ public class ReceiptController {
     private final ReceiptService receiptService;
 
     @PostMapping
-    public ResponseEntity<Receipt> generateReceipt(@RequestBody List<Product> products) {
+    public ResponseEntity<Receipt> generateReceipt(@Valid @RequestBody List<Product> products) {
         Receipt receipt = receiptService.generateReceipt(products);
         return new ResponseEntity<>(receipt, HttpStatus.OK);
     }
